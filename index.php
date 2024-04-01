@@ -2,22 +2,50 @@
 
 ?>
 <!DOCTYPE html>
-<html lang="en>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/styles.css">
-	<title>Harry Clark - CS1_IAD Port 3</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----STYLE SHEET----->
+
+    <link rel="stylesheet" href="style.css">
+
+    <!----NOT SURE IF THIS IS THE CORRECT WAY TO IMPORT FONTS----->
+    <!----USING ARCH FOR THIS PORTFOLIO----->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+
+    <title>Harry Clark - CS1_IAD Port 3</title>
 </head>
 <body>
-	<h1>Harry Clark - IAD Port 3</h1>
-	<main>
-		<form action="formhandler.php" method="post">
-		<label for="firstname">Firsname</label>
-		<input id="firstname" type="text" name="firstname">
-		<button type="submit">Submit</button>
-	</form>
-	</main>
+
+    <!----BASE FUNCTIONALITY FOR THE NAVBAR----->
+
+	<main-header>
+        <h1>Harry Clark - IAD Port 3</h1>
+        <nav>
+            <ul class="NAVBAR">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">LOG IN</a></li>
+            </ul>
+        </nav>
+	</main-header>
+
+    <main>
+        <form action="formhandler.php" method="post">
+            <div class="INPUT-BOX">
+            <input type="text" name="uid" placeholder="Username"> 
+            <input type="text" name="email" placeholder="Email"> 
+            <input type="text" name="email_retype" placeholder="Retype Email"> 
+            <button type="submit">Submit</button>
+            </div>
+
+        </form>
+    </main>
 </body>
 </html>
