@@ -12,6 +12,10 @@
 // FOCUSSING ON THE GETTERS AND SETTERS OF THE ATTRIBUTES IN THE INDEX FILE
 // TO DISCERN WHICH FIELDS HAVE BEEN FILLED IN
 
+// NESTED INCLUDES
+
+include '../sign_con.php';
+
 class SignUpPage 
 {
     private $FIELD;
@@ -38,5 +42,6 @@ class SignUpPage
 $FIELD_IDS = ["uid", "email", "email_retype"];
 $FORM_FIELDS = new SignUpPage($FIELD_IDS, $_POST);
 $FIELD = $FORM_FIELDS->GET_FORM_ID();
+$SIGNUP = new SignUpController($FIELD);
 
 ?>
