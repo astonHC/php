@@ -18,12 +18,12 @@ class SignUpPage
 
     public function __construct($FID, $POST_DATA)
     {
-        $this->FID = [];
+        $this->FIELD = [];
 
         // USE A TENARY OPERATOR INSIDE OF THIS LOOP
         // TO DISCERN IF ANY AND ALL ID'S ARE BEING USED
 
-        foreach ($FIELD_IDS as $var)
+        foreach ($FID as $var)
         {
             $this->FIELD[$var] = isset($POST_DATA[$var]) ? $POST_DATA[$var] : null;
         }
@@ -31,12 +31,12 @@ class SignUpPage
 
     public function GET_FORM_ID()
     {
-        return $this->FIELD_IDS;
+        return $this->FIELD;
     }
 }
 
 $FIELD_IDS = ["uid", "email", "email_retype"];
-$FORM_FIELDS = new SignUpPage($FID, $_POST);
+$FORM_FIELDS = new SignUpPage($FIELD_IDS, $_POST);
 $FIELD = $FORM_FIELDS->GET_FORM_ID();
 
 ?>
