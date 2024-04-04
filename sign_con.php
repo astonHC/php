@@ -36,6 +36,13 @@ class SignUpController
         $RESULT = (empty($this->$uid) || empty($this->$email) || empty($this->$email_retype)) ? true : false;
         return $RESULT;
     }
+
+    private function INVALID_UID()
+    {
+        $RESULT = !preg_match("/^[a-zA-Z0-9]*$/", $this->uid) ? false : true;
+        return $RESULT;
+
+    }
 }
 
 ?>
