@@ -1,0 +1,16 @@
+<?php
+
+// COPYRIGHT (C) HARRY CLARK 2024
+
+// STUDENT NO. 230315257
+
+// CS1_IAD PORTFOLIO 3
+
+// THIS FILE PERTAINS TOWARDS THE DEFINITION OF DATABASE RELATIVE VARIABLES
+
+define('DB_HOST', 'localhost');
+define('DB_USER', '');
+define('DB_PASSWORD', '');
+define('DB_NAME', 'test');
+
+?>
