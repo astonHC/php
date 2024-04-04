@@ -37,12 +37,39 @@ class SignUpController
         return $RESULT;
     }
 
-    private function INVALID_UID()
+    private function INVALID_INPUT($INPUT)
     {
-        $RESULT = !preg_match("/^[a-zA-Z0-9]*$/", $this->uid) ? false : true;
-        return $RESULT;
+        // CREATE A MAP FOR THE VARIABLE DIRECTLY
+        // THINK OF IT AS THOUGH WE ARE MAPPING CHARS TO THE VARIABLES
+        // TO BE ABLE TO DISCEERN THROUGH DIFFERENT TYPES
 
+        $INPUT_TYPES = 
+        [
+            'uid' => $this->uid,
+            'email' => $this->email,
+            'email_retype' => $this->email_retype
+        ];
+
+        switch($INPUT)
+        {
+            case 'uid':
+                return !preg_match("/^[a-zA-Z0-9]*$/", $this->uid) ? false : true;
+            break;
+
+            case 'email':
+                return !preg_match("/^[a-zA-Z0-9]*$/", $this->email) ? false : true;
+            break;
+
+            case 'email_retype':
+                return !preg_match("/^[a-zA-Z0-9]*$/", $this->email_retype) ? false : true;
+            break;
+
+            default:
+                throw new Exception("Invalid Variable Type");
+        }
     }
+
+    
 }
 
 ?>
