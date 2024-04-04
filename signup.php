@@ -28,6 +28,13 @@ class SignUp extends Database
 
         return ($RESULT->num_rows > 0) ? true : false;
     }
+
+    // HASHED PASSWORD AS PER THE REQUIREMENTS OF THE BRIEF
+
+    protected function HASHED_PWD($password)
+    {
+        return password_hash($password, PASSWORD_DEFAULT);
+    }
 }
 
 ?>
