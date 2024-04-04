@@ -26,7 +26,7 @@ class SignUp extends Database
 
         // ALLOCATE ROWS FOR THE NEW USER
 
-        return ($RESULT->num_rows > 0) ? true : false;
+        return $RESULT->num_rows > 0;
     }
 
     // HASHED PASSWORD AS PER THE REQUIREMENTS OF THE BRIEF
@@ -34,6 +34,18 @@ class SignUp extends Database
     protected function HASHED_PWD($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    public function CREATE_USER($DATA)
+    {
+        $username = $DATA["uid"];
+        $email = $DATA["email"];
+        $hashed_pwd = $this->HASHED_PWD($DATA["password"]);
+
+        $STATE = $this->CONNECT()->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        $STATE->bind_param("sss", $username, $email, $hashed_pwd);
+
+        return $STATE->execute() ? true : false;
     }
 }
 
