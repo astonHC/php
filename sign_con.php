@@ -18,11 +18,23 @@ class SignUpController
     private static $email;
     private static $email_retype;
 
+    // CONSTRUCT THE CONTROLLER TYPE TO DISCERN BETWEEN THE VARIOUS INPUT METHODS
+    // THIS IS JUST TO INSTANTIATE THEM
+
     public function __construct($fields)
     {
         $this->uid = isset($fields['uid']) ? $fields['uid'] : null;
         $this->email = isset($fields['email']) ? $fields['email'] : null;
         $this->email_retype = isset($fields['email_retype']) ? $fields['email_retype'] : null;
+    }
+    
+    // TENARY OPERTOR THAT RETURNS THE TRUE OR FALSE OUTPUT OF WHETHER
+    // THE CORRESPONDENCE FOR THE INPUT FIELD HAVE BEEN MET 
+
+    private function EMPTY_INPUT()
+    {
+        $RESULT = (empty($this->$uid) || empty($this->$email) || empty($this->$email_retype)) ? true : false;
+        return $RESULT;
     }
 }
 
