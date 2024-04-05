@@ -50,7 +50,7 @@ and select ``Y`` for them all
 
 # NOTE:
 
-If in doubt whereby you are experiencing issues running phpMA on localhost or through any SSL connection, make sure that you cd into ``/etc/php`` then ``sudo YOUR_TEXT_EDITOR`` php.ini``
+If in doubt whereby you are experiencing issues running phpMA on localhost or through any SSL connection, make sure that you cd into ``/etc/php`` then ``sudo YOUR_TEXT_EDITOR`` ``php.ini``
 
 and add these lines:
 
