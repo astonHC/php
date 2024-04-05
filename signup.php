@@ -19,14 +19,15 @@ class SignUp extends Database
 
     protected function CHECK_USER($username, $email)
     {
-        $CONNECT_READY = $this->CONNECT()->prepare('SELECT * FROM users WHERE username = ? OR email = ?');
+        $SQL = "SELECT * FROM users WHERE username = :username OR email = :email";
+        $CONNECT_READY = $this->CONNECT()->prepare($SQL);
         $CONNECT_READY->bind_param('ss', $username, $email);
         $CONNECT_READY->execute();
-        $RESULT = $CONNECT_READY->get_result();
+        $RESULT = $CONNECT_READY->fetch(PDO::FETCH_ASSOC);
 
         // ALLOCATE ROWS FOR THE NEW USER
 
-        return $RESULT->num_rows > 0;
+        return $RESULT ? true : false;
     }
 
     // HASHED PASSWORD AS PER THE REQUIREMENTS OF THE BRIEF
@@ -42,7 +43,8 @@ class SignUp extends Database
         $email = $DATA["email"];
         $hashed_pwd = $this->HASHED_PWD($DATA["password"]);
 
-        $STATE = $this->CONNECT()->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        $SQL = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+        $STATE = $this->CONNECT()->prepare($SQL);
         $STATE->bind_param("sss", $username, $email, $hashed_pwd);
 
         return $STATE->execute() ? true : false;
