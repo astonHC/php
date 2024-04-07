@@ -70,7 +70,7 @@ class Database
     }
 }
 
-$NEW_DATABASE = Database::GET_INSTANCE();
-$DB = $NEW_DATABASE->DB;
+$database = Database::GET_INSTANCE();
+$DB = $database->DB;
 
 ?>
