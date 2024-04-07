@@ -12,81 +12,75 @@
 // FOCUSSING ON THE CONTROLLER ASPECT WHICH WILL ACT AS THE MASTER LOGIC 
 // FOR THE REST OF THE SIGNUP PAGE
 
-class SignUpController extends SignUpPage
+class SignUpController
 {
-    private static $uid;
-    private static $email;
-    private static $email_retype;
+    private $USER;
+    private $PWD;
+    private $EMAIL;
+    private $DB;
 
-    public function __construct($fields)
+    public function __construct($USER, $PWD, $EMAIL, $DB) 
     {
-        $this->uid = isset($fields['uid']) ? $fields['uid'] : null;
-        $this->email = isset($fields['email']) ? $fields['email'] : null;
-        $this->email_retype = isset($fields['email_retype']) ? $fields['email_retype'] : null;
+        $this->USER = $USER;
+        $this->PWD = $PWD;
+        $this->EMAIL = $EMAIL;
+        $this->DB = $DB;
     }
 
-    private function EMPTY_INPUT()
+    protected function CHECK_USER($USER, $EMAIL)
     {
-        return empty($this->uid) || empty($this->email) || empty($this->email_retype);
+        $SQL = "SELECT * FROM users WHERE username = ? OR email = ?";
+        $CONNECT_READY = $this->DB->prepare($SQL);
+        $CONNECT_READY->execute([$USER, $EMAIL]);
+        $RESULT = $CONNECT_READY->fetch(PDO::FETCH_ASSOC);
+
+        return $RESULT ? true : false;
     }
 
-    private function INVALID_INPUT($INPUT)
+    protected function HASHED_PWD($PWD)
     {
-        $INPUT_TYPES = [
-            'uid' => $this->uid,
-            'email' => $this->email,
-            'email_retype' => $this->email_retype
-        ];
-
-        switch ($INPUT) {
-            case 'uid':
-                return !preg_match("/^[a-zA-Z0-9]*$/", $this->uid);
-            case 'email':
-                return !filter_var($this->email, FILTER_VALIDATE_EMAIL);
-            case 'email_retype':
-                return !filter_var($this->email_retype, FILTER_VALIDATE_EMAIL);
-            default:
-                throw new Exception("Invalid Variable Type");
-        }
+        return password_hash($PWD, PASSWORD_DEFAULT);
     }
 
-    public function SIGNUP_USER()
+    public function CREATE_USER($USER, $EMAIL, $PWD)
     {
-        if ($this->EMPTY_INPUT()) 
-        {
-            header("location: ../index.php?error=emptyinput");
-            exit();
-        }
+        $HASH_PWD = $this->HASHED_PWD($PWD);
 
-        if ($this->INVALID_INPUT('email')) 
-        {
-            header("location: ../index.php?error=invalid_email");
-            exit();
-        }
+        $SQL = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        $STATE = $this->DB->prepare($SQL);
+        $STATE->execute([$USER, $EMAIL, $HASH_PWD]);
 
-        if ($this->email !== $this->email_retype) 
-        {
-            header("location: ../index.php?error=emails_dont_match");
-            exit();
-        }
-
-        if ($this->CHECK_USER($this->uid, $this->email)) 
-        {
-            header("location: ../index.php?error=user_exists");
-            exit();
-        }
-
-        $hashed_password = $this->HASHED_PWD($this->password);
-
-        if (!$this->CREATE_USER(["uid" => $this->uid, "email" => $this->email, "password" => $hashed_password])) 
-        {
-            header("location: ../index.php?error=signup_failed");
-            exit();
-        }
-
-        header("location: ../sign.php?success=signup");
-        exit();
+        return $STATE->rowCount() > 0 ? true : false;
     }
+
+    public function register() 
+    {
+        if (!$this->USER || !$this->PWD || !$this->EMAIL) 
+        {
+            return "Invalid input";
+        }
+ 
+        if ($this->CREATE_USER($this->USER, $this->EMAIL, $this->PWD)) 
+        {
+            return "User added to the database";
+        } 
+        else 
+        {
+            return "An error occurred during registration";
+        }
+    }
+}
+
+if (isset($_POST['submitted'])) 
+{
+    require_once('database.php');
+
+    $username = isset($_POST['username']) ? $_POST['username'] : false;
+    $password = isset($_POST['password']) ? $_POST['password'] : false;
+    $email = isset($_POST['email']) ? $_POST['email'] : false;
+
+    $user = new SignUpController($username, $password, $email, $DB);
+    echo $user->register();
 }
 
 ?>
