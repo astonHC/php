@@ -44,6 +44,7 @@ In a similar vein to how you would setup MySQL, run the mariaDB service ``sudo s
 create a new user using ``sudo mysql -u root``
 
 from there, run the following 
+
 ![image](https://github.com/astonHC/php/assets/139020900/d130b22e-e9bc-4e5c-980d-e61a99189857)
 
 and select ``Y`` for them all
