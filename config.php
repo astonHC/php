@@ -8,9 +8,12 @@
 
 // THIS FILE PERTAINS TOWARDS THE DEFINITION OF DATABASE RELATIVE VARIABLES
 
-define('DB_HOST', 'localhost');
-define('DB_USER', '');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'test');
+class Config
+{
+    const DB_HOST = 'localhost';
+    const DB_USER = 'root';
+    const DB_PASSWORD = '123';
+    const DB_NAME = 'aproject';
+}
 
 ?>
