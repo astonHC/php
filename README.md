@@ -49,6 +49,15 @@ from there, run the following
 
 and select ``Y`` for them all
 
+To test if everything is working, you can run the following command 
+
+![image](https://github.com/astonHC/php/assets/139020900/c8e1faf6-bfb6-4f2b-86a3-790665d7a989)
+
+which will show you a runtime showcase of your httpd SSL connection
+
+![image](https://github.com/astonHC/php/assets/139020900/4c07f17b-4463-4b95-89cc-ea6c5e7a10dd)
+
+
 # NOTE:
 
 If in doubt whereby you are experiencing issues running phpMA on localhost or through any SSL connection, make sure that you cd into ``/etc/php`` then ``sudo YOUR_TEXT_EDITOR`` ``php.ini``
