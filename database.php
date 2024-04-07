@@ -9,31 +9,25 @@
 // THIS FILE PERTAINS TOWARDS THE LOGIC OF ACCESSING AND COMMUNICATING
 // WITH A LOCALLY DISTRIBUTED DATABASE USING PHPMA
 
-require_once '../config.php';
+require_once('config.php');
 
-
-class Database
+class Database 
 {
-    private $HOST = DB_HOST;
-    private $DB_NAME = DB_NAME;
-    private $USERNAME = DB_USER;
-    private $PASSWORD = DB_PASSWORD;
-
     private static $_INSTANCE = null;
+    public $DB;
 
-    private $_PDO, $_QUERY, $_ERROR = false, $_RESULTS, $_COUNT = 0;
-
-    public function __construct()
+    private function __construct() 
     {
-        try
+        try 
         {
-            $this->_PDO = new PDO("mysql:host=$this->HOST;dbname=$this->DB_NAME;charset=utf8", $this->USERNAME, $this->PASSWORD);
-
-        }
-
-        catch(PDOException $E)
+            $this->DB = new PDO("mysql:dbname=" . Config::DB_NAME . ";host=" . Config::DB_HOST, Config::DB_USER, Config::DB_PASSWORD);
+            $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } 
+        catch (PDOException $E) 
         {
-            die($E->getMessage());
+            echo("An error occurred while connecting to the database.<br>");
+            echo($E->getMessage());
+            exit;
         }
     }
 
@@ -49,36 +43,34 @@ class Database
 
     public function GET_QUERY($SQL, $PARAM = array())
     {
-        if($this->$_QUERY = $this->_PDO->prepare($SQL))
+        $QUERY = $this->DB->prepare($SQL);
+        $INSTANTIATE = 1;
+
+        if(COUNT($PARAM))
         {
-            $INSTANTIATE = 1;
-
-            if(COUNT($PARAM))
+            foreach($PARAM as $P)
             {
-                foreach($PARAM as $P)
-                {
-                    $this->_QUERY->bindValue($INSTANTIATE, $P);
-                    $INSTANTIATE++;
-                }
+                $QUERY->bindValue($INSTANTIATE, $P);
+                $INSTANTIATE++;
             }
+        }
 
-            if($this->_QUERY->execute())
-            {
-                $this->_RESULTS = $this->_QUERY->fetchAll(PDO::FETCH_OBJ);
-                $this->_COUNT = $this->_QUERY->rowCount();
-            }
+        if($QUERY->execute())
+        {
+            $RESULTS = $QUERY->fetchAll(PDO::FETCH_OBJ);
+            $COUNT = $QUERY->rowCount();
+        }
 
-            else
-            {
-                $this->_ERROR = true;
-            }
+        else
+        {
+            $ERROR = true;
         }
 
         return $this;
     }
-
-    
 }
 
+$NEW_DATABASE = Database::GET_INSTANCE();
+$DB = $NEW_DATABASE->DB;
 
 ?>
