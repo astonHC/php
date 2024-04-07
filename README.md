@@ -52,9 +52,9 @@ and select ``Y`` for them all
 
 If in doubt whereby you are experiencing issues running phpMA on localhost or through any SSL connection, make sure that you cd into ``/etc/php`` then ``sudo YOUR_TEXT_EDITOR`` ``php.ini``
 
-and add these lines:
+and uncomment these lines:
 
-![image](https://github.com/astonHC/php/assets/139020900/425e8738-0e72-4720-a11b-a3fead89fd42)
+![image](https://github.com/astonHC/php/assets/139020900/7c0a6e61-0174-466c-95c7-94b6c5c96569)
 
 this adds the necessary funcrtionality to the phpMA connection because it will assume by default that you dont have the necessary mysqli extensions
 
