@@ -82,5 +82,5 @@ if (isset($_POST['submitted']))
     $user = new SignUpController($username, $password, $email, $DB);
     echo $user->register();
 }
-
+    
 ?>
