@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,15 +34,18 @@
 	</main-header>
 
     <main>
-        <form action="formhandler.php" method="post">
-            <div class="INPUT-BOX">
-            <input type="text" name="uid" placeholder="Username"> 
-            <input type="text" name="email" placeholder="Email"> 
-            <input type="text" name="email_retype" placeholder="Retype Email"> 
-            <button type="submit">Submit</button>
-            </div>
+    <?php if(isset($_POST['submitted'])): ?>
+        <p><?php require_once('sign_con.php'); ?></p>
+    <?php endif; ?>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <div class="INPUT-BOX">
+            <input type="text" name="username" placeholder="Username" required> 
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" name="submitted">Submit</button>
+        </div>
+    </form>
+</main>
 
-        </form>
-    </main>
 </body>
 </html>
