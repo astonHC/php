@@ -42,10 +42,6 @@
             <h2>--- About <span>AProject ---</span></h2>
             <h4></h4>
             <p>
-
-
-
-
             </p>
         </div>
     </section>
