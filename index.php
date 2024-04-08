@@ -7,7 +7,7 @@
 
     <!----STYLE SHEET----->
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!----NOT SURE IF THIS IS THE CORRECT WAY TO IMPORT FONTS----->
     <!----USING ARCH FOR THIS PORTFOLIO----->
@@ -26,25 +26,29 @@
         <h1>Harry Clark - IAD Port 3</h1>
         <nav>
             <ul class="NAVBAR">
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">ABOUT US</a></li>
-                <li><a href="#">LOG IN</a></li>
+                <li><a href="index.php">HOME</a></li>
+                <li><a href="about.php">ABOUT US</a></li>
+                <li><a href="login.php">LOG IN</a></li>
             </ul>
         </nav>
 	</main-header>
 
     <main>
+
+    <h1>Sign Up!</h1>
+
     <?php if(isset($_POST['submitted'])): ?>
         <p><?php require_once('sign_con.php'); ?></p>
     <?php endif; ?>
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <div class="INPUT-BOX">
-            <input type="text" name="username" placeholder="Username" required> 
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" name="submitted">Submit</button>
-        </div>
-    </form>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" autocomplete="off">
+    <div class="INPUT-BOX">
+        <input type="text" name="username" placeholder="Username" required> 
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" name="submitted">Sign Up</button>
+    </div>
+</form>
+
 </main>
 
 </body>
