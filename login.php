@@ -12,9 +12,82 @@
 // THIS WILL TAKE INTO ACCOUNT OF WHICH USERS ARE CURRENTLY WITHIN THE DATABASE
 // IN ASSOCIATION WITH THEIR DESIGNATED TAG
 
+require_once('config.php');
+
 class Login
 {
-    
+    private $USER;
+    private $PWD;
+    private $DB;
+
+    public function __construct($USER, $PWD, $DB) 
+    {
+        $this->USER = $USER;
+        $this->PWD = $PWD;
+        $this->DB = $DB;
+    }
+
+    protected function CHECK_USER($USER)
+    {
+        $SQL = "SELECT * FROM users WHERE username = ?";
+        $CONNECT_READY = $this->DB->prepare($SQL);
+        $CONNECT_READY->execute([$USER]);
+        $RESULT = $CONNECT_READY->fetch(PDO::FETCH_ASSOC);
+
+        return $RESULT ? $RESULT : false;
+    }
+
+    public function LOGIN() 
+    {
+        if (!$this->USER || !$this->PWD) 
+        {
+            return "Invalid input";
+        }
+
+        $user = $this->CHECK_USER($this->USER);
+
+        if ($user && password_verify($this->PWD, $user['password'])) 
+        {
+            header("Location: welcome.php?username=" . $this->USER);
+            exit();
+        } 
+        else 
+        {
+            return "Invalid username or password";
+        }
+    }
+}
+
+if (isset($_POST['submitted'])) 
+{
+    require_once('database.php');
+
+    $USERNAME = isset($_POST['username']) ? $_POST['username'] : false;
+    $PASSWORD = isset($_POST['password']) ? $_POST['password'] : false;
+
+    $LOG = new Login($USERNAME, $PASSWORD, $DB);
+    echo $LOG->LOGIN();
 }
 
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="login.php" method="post">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br>
+        <input type="hidden" name="submitted" value="1">
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
+
