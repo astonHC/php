@@ -39,7 +39,11 @@ update your repositories using ``sudo pacman -Syu``
 
 ```5.``` last but not least, MariaDB
 
-In a similar vein to how you would setup MySQL, run the mariaDB service ``sudo systemctl start mariadb.service``
+Before running the mariaDB service, run this command ``mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql``
+
+The following will assume that you already have a working lib directory for your mySQL SSL connection. From there, it will create an arbitrary connection point
+
+Now, in a similar vein to how you would setup MySQL, run the mariaDB service ``sudo systemctl start mariadb.service``
 
 create a new user using ``sudo mysql -u root``
 
