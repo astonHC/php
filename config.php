@@ -15,5 +15,4 @@ class Config
     const DB_PASSWORD = '123';
     const DB_NAME = 'aproject';
 }
-
 ?>
