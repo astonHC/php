@@ -51,7 +51,9 @@ from there, run the following
 
 ![image](https://github.com/astonHC/php/assets/139020900/d130b22e-e9bc-4e5c-980d-e61a99189857)
 
-and select ``Y`` for them all
+and select ``Enter`` for all of them
+
+When prompted to make a new password, just set it to whatever, your username by default will be root
 
 To test if everything is working, you can run the following command 
 
