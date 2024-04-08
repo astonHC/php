@@ -53,7 +53,7 @@ class SignUpController
         return $STATE->rowCount() > 0 ? true : false;
     }
 
-    public function register() 
+    public function REGISTER() 
     {
         if (!$this->USER || !$this->PWD || !$this->EMAIL) 
         {
@@ -79,8 +79,8 @@ if (isset($_POST['submitted']))
     $password = isset($_POST['password']) ? $_POST['password'] : false;
     $email = isset($_POST['email']) ? $_POST['email'] : false;
 
-    $user = new SignUpController($username, $password, $email, $DB);
-    echo $user->register();
+    $SIGN = new SignUpController($username, $password, $email, $DB);
+    echo $SIGN->REGISTER();
 }
-    
+
 ?>
