@@ -306,8 +306,27 @@ input:checked + label .description
     transform: translate(-50%, -50%);
 }
 
+.project-container 
+{
+    position: relative;
+}
+
 .add-project-btn 
 {
-    margin-top: 20px;
-    display: block;
+    position: fixed; 
+    bottom: 20px;
+    left: 43%; 
+    transform: translateX(-50%); 
+    transform: translateY(-500%);
+    padding: 10px 20px; 
+    background-color: #000000; 
+    border: solid 1px #36363633; 
+    border-radius: 5px;
+    text-align: center; 
+    transition: background-color 0.3s ease;
+}
+
+.add-project-btn:hover 
+{
+    background-color: #3f9afc; 
 }
