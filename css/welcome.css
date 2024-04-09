@@ -1,0 +1,313 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --main-color: #1d3b6b;
+    --bg-color: #161616;
+    --text-color: #ffffff;
+    --span-color: #1ee9ff;
+    --card-color: #4540dd7c;
+    --button-color: #00011c;
+    --second-color: #f3f8ff;
+    --h2-font: 3rem;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main-header
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.NAVBAR li, a
+{
+    position: relative;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 50px;
+}
+
+.NAVBAR a::before
+{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+}
+
+.NAVBAR a:hover
+{
+    color: #1ee9ff;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+main 
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.INPUT-BOX
+{
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.INPUT-BOX input 
+{
+    width: calc(100% - 20px); 
+    height: 100%;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 15px;
+    color: #000000;
+    padding: 20px 45px 20px 20px;
+    margin-bottom: 20px; 
+}
+
+.INPUT-BOX i
+{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+button
+{
+    width: 50%;
+    height: 45px;
+    margin: 30px 0;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 1px rgba(0,0,0, .1);
+}
+
+.CARD-WRAPPER
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CARD-CONTAINER
+{
+    height: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+}
+
+.CARD
+{
+    background: var(--card-color);
+    width: 150px;
+    border-radius: .75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin: 0 10px;
+    display: flex;
+    align-items: flex-end;
+    transition: .6s cubic-bezier(.30, -0.03, 0, .99);
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, .5);
+}
+
+.CARD > .row
+{
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.CARD > .row > .icon
+{
+    background: #223;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.CARD > .row > .description
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    height: 80px;
+    width: 520px;
+    opacity: 0;
+    transition: translateY(30px);
+    transition-delay: .3s;
+    transition: all .3s ease;
+}
+
+.description p
+{
+    color: #ffffff;
+    padding-top: 5px;
+}
+
+.description h4
+{
+    text-transform: uppercase;
+}
+
+input
+{
+    display: none;
+}
+
+input:checked + label
+{
+    width: 600px;
+}
+
+input:checked + label .description
+{
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.CARD[for="c1"]
+{
+    margin-top: -200px;
+    opacity: 1 !important;
+    background-image: url('../img/c1.jpg');
+}
+
+.CARD[for="c1"]:hover
+{
+    opacity: .5 !important;
+    transform: scale(1.025);
+}
+
+.CARD[for="c1"]:hover::after
+{
+    content: "";
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 0, 255, 0.351);
+    transition: background-color 1s ease-in;
+    z-index: 1;
+}
+
+.CARD[for="c2"]
+{
+    margin-top: -200px;
+    opacity: 1 !important;
+    background-image: url('../img/c1.jpg');
+}
+
+.CARD[for="c2"]:hover
+{
+    opacity: .5 !important;
+    transform: scale(1.025);
+}
+
+.CARD[for="c2"]:hover::after
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 0, 255, 0.351);
+    transition: background-color 1s ease-in;
+    z-index: 1;
+}
+
+.CARD[for="c3"]
+{
+    margin-top: -200px;
+    opacity: 1 !important;
+    background-image: url('../img/c1.jpg');
+
+}
+
+.CARD[for="c3"]:hover
+{
+    opacity: .5 !important;
+    transform: scale(1.05);
+}
+
+.CARD[for="c3"]:hover::after
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 0, 255, 0.351);
+    transition: background-color 1s ease-in;
+    z-index: 1;
+}
+
+.CARD .description h4,
+.CARD .description p 
+{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.WELCOME {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.add-project-btn 
+{
+    margin-top: 20px;
+    display: block;
+}
