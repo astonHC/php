@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="WELCOME">
+
     <?php
     if (isset($_GET['username'])) 
     {
@@ -24,16 +25,16 @@
             <?php
             require_once('database.php');
             
+            $user_id = $_SESSION['uid'];
             $database = Database::GET_INSTANCE();
             $db = $database->DB;
-            $sql = "SELECT * FROM projects";
+            $sql = "SELECT * FROM projects ";
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-            foreach ($projects as $project) 
-            {
+            foreach ($projects as $project) {
                 echo '<input type="radio" name="slide" id="c'.$project['pid'].'">';
                 echo '<label for="c'.$project['pid'].'" class="CARD" id="CARD_'.$project['pid'].'">';
                 echo '<div class="row">';
