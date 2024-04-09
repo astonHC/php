@@ -134,13 +134,16 @@ button
 {
     height: 400px;
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row; 
     justify-content: start;
+    flex-wrap: wrap; 
 }
 
 .CARD
 {
+    flex: 1 0 auto;
     background: var(--card-color);
+    height: 200px;
     width: 150px;
     border-radius: .75rem;
     background-size: cover;
@@ -214,76 +217,29 @@ input:checked + label .description
     transform: translateY(0) !important;
 }
 
-.CARD[for="c1"]
-{
-    margin-top: -200px;
-    opacity: 1 !important;
-    background-image: url('../img/c1.jpg');
-}
-
-.CARD[for="c1"]:hover
-{
-    opacity: .5 !important;
-    transform: scale(1.025);
-}
-
-.CARD[for="c1"]:hover::after
-{
-    content: "";
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(13, 0, 255, 0.351);
-    transition: background-color 1s ease-in;
-    z-index: 1;
-}
-
-.CARD[for="c2"]
-{
-    margin-top: -200px;
-    opacity: 1 !important;
-    background-image: url('../img/c1.jpg');
-}
-
-.CARD[for="c2"]:hover
-{
-    opacity: .5 !important;
-    transform: scale(1.025);
-}
-
-.CARD[for="c2"]:hover::after
-{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(13, 0, 255, 0.351);
-    transition: background-color 1s ease-in;
-    z-index: 1;
-}
-
+.CARD[for="c1"],
+.CARD[for="c2"],
 .CARD[for="c3"]
 {
-    margin-top: -200px;
+    margin-top: 0;
     opacity: 1 !important;
     background-image: url('../img/c1.jpg');
-
 }
 
+.CARD[for="c1"]:hover,
+.CARD[for="c2"]:hover,
 .CARD[for="c3"]:hover
 {
     opacity: .5 !important;
-    transform: scale(1.05);
+    transform: scale(1.025);
 }
 
+.CARD[for="c1"]:hover::after,
+.CARD[for="c2"]:hover::after,
 .CARD[for="c3"]:hover::after
 {
     content: "";
-    position: absolute;
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
@@ -299,7 +255,8 @@ input:checked + label .description
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.WELCOME {
+.WELCOME 
+{
     position: absolute;
     top: 10%;
     left: 50%;
