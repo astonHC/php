@@ -13,11 +13,10 @@
 // WITH ADHERANCE TOWARDS THE REQUIREMENTS OF THE BRIEF TO ENSURE THAT
 // THE INFRASTRUCTURE IS MAINTAINABLE
 
+require_once('database.php');
+
 class Security
 {
-    private static $TOKEN;
-    private static $HASH_TOKEN;
-    private static $HASH_EXEC = 5;
 
     // GENERATE AN ARBITRAY CSRF TOKEN AND STORE IN WITHIN
     // THE RELEVANT SESSION ID
@@ -25,15 +24,15 @@ class Security
     // THIS IS GOVERNED BY GENERATING A RANDOM TOKEN FROM A
     // RANDOM ASSORTMENT OF NUMBERS GOVERNED BY A BIT FLAG, MANTISSA AND EXPONENT (IEEE 754)
 
-    public static function GENERATE_CSRF()
+    public function GENERATE_CSRF()
     {
         try
         {
             if(!isset($_SESSION['csrf_token']))
             {
-                self::$TOKEN = bin2hex(random_bytes(32));
-                self::$HASH_TOKEN = self::GENERATE_HASH();
-                $_SESSION['csrf_token'] = self::$HASH_TOKEN;
+                $TOKEN = bin2hex(random_bytes(32));
+                $HASH_TOKEN = self::GENERATE_HASH();
+                $_SESSION['csrf_token'] = $HASH_TOKEN;
             }
 
             return $_SESSION['csrf_token'];
@@ -48,11 +47,11 @@ class Security
 
     // GENERATE THE PROVIDED HASHED TOKEN WITH AN ARBITRARY CONTEXT
 
-    private function GENERATE_HASH($CONTEXT='')
+    private function GENERATE_HASH($TOKEN)
     {
         try
         {
-            return bin2hex(random_bytes(32));
+            return hash('sha256', $TOKEN);
         }
 
         catch(Exception $E)
@@ -68,14 +67,14 @@ class Security
     {
         try 
         {
-            if (isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token)) 
+            if (isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $TOKEN)) 
             {
                 unset($_SESSION['csrf_token']);
                 return true;
             }
 
             return false;
-        } 
+        }  
         catch (Exception $E) 
         {
             error_log("CSRF token validation failed: " . $E->getMessage());
