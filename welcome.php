@@ -25,16 +25,25 @@
             <?php
             require_once('database.php');
             
-            $user_id = $_SESSION['uid'];
+            $username = $_GET['username'];
             $database = Database::GET_INSTANCE();
             $db = $database->DB;
-            $sql = "SELECT * FROM projects ";
+
+            $sql = "SELECT uid FROM users WHERE username = :username";
             $stmt = $db->prepare($sql);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $user_id = $user['uid'];
+
+            $sql = "SELECT * FROM projects WHERE uid = :uid";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':uid', $user_id, PDO::PARAM_INT);
             $stmt->execute();
             $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-            foreach ($projects as $project) {
+            foreach ($projects as $project) 
+            {
                 echo '<input type="radio" name="slide" id="c'.$project['pid'].'">';
                 echo '<label for="c'.$project['pid'].'" class="CARD" id="CARD_'.$project['pid'].'">';
                 echo '<div class="row">';
