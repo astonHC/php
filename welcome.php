@@ -10,7 +10,6 @@
 </head>
 <body>
     <div class="WELCOME">
-
     <?php
     if (isset($_GET['username'])) 
     {
@@ -19,46 +18,40 @@
     ?>
     
     </div>
-        <div class="CARD-WRAPPER">
-            <div class="CARD-CONTAINER">
-                <input type="radio" name="slide" id="c1">
-                <label for="c1" class="CARD" id="CARD_1">
-                    <div class="row">
-                        <div class="icon">1</div>
-                        <div class="description">
-                            <h4>Project 1</h4>
-                            <p>This is a description of Project 1
-                            </p>
-                        </div>
-                    </div>
-                </label>
-        
-                <input type="radio" name="slide" id="c2">
-                <label for="c2" class="CARD" id="CARD_2">
-                    <div class="row">
-                        <div class="icon">2</div>
-                        <div class="description">
-                            <h4>Project 2</h4>
-                            <p>This is a description of Project 2
-                            </p>
-                        </div>
-                    </div>
-                </label>
-                <input type="radio" name="slide" id="c3">
-                <label for="c3" class="CARD" id="CARD_3">
-                    <div class="row">
-                        <div class="icon">3</div>
-                        <div class="description">
-                            <h4>Project 3</h4>
-                            <p>This is a description of Project 3
-                            </p>
-                        </div>
-                    </div>
-                </label>
-            </div>
-        </div>
-        </div>
 
-    <a href="project.php" class="add-project-btn">Add Project</a>
+    <div class="CARD-WRAPPER">
+        <div class="CARD-CONTAINER">
+            <?php
+            require_once('database.php');
+            
+            $database = Database::GET_INSTANCE();
+            $db = $database->DB;
+            $sql = "SELECT * FROM projects";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+            foreach ($projects as $project) 
+            {
+                echo '<input type="radio" name="slide" id="c'.$project['pid'].'">';
+                echo '<label for="c'.$project['pid'].'" class="CARD" id="CARD_'.$project['pid'].'">';
+                echo '<div class="row">';
+                echo '<div class="icon">'.$project['pid'].'</div>';
+                echo '<div class="description">';
+                echo '<h4>'.$project['title'].'</h4>';
+                echo '<p>'.$project['description'].'</p>';
+                echo '</div>';
+                echo '</div>';
+                echo '</label>';
+            }
+            ?>
+        </div>
+    </div>
+
+    <div class="project-container">
+        <a href="project.php" class="add-project-btn">Add Project</a>
+    </div>
+
 </body>
 </html>
