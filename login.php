@@ -46,11 +46,11 @@ class Login
             return "Invalid input";
         }
 
-        $IS_VALID_USER = $this->CHECK_USER();
+        $user = $this->CHECK_USER();
 
-        if ($IS_VALID_USER && password_verify($this->PWD, $IS_VALID_USER['password'])) 
+        if ($user && password_verify($this->PWD, $user['password'])) 
         {
-            header("Location: welcome.php?username=" . urlencode($IS_VALID_USER['username']));
+            header("Location: welcome.php?username=" . urlencode($user['username'])); // Pass the username here
             exit();
         } 
         else 
@@ -73,6 +73,7 @@ if (isset($_POST['submitted']))
 }
 
 ?>
+
 
 
 <!DOCTYPE html>
