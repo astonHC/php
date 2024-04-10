@@ -17,21 +17,23 @@ require_once('config.php');
 class Login
 {
     private $USER;
+    private $EMAIL;
     private $PWD;
     private $DB;
 
-    public function __construct($USER, $PWD, $DB) 
+    public function __construct($USER, $EMAIL, $PWD, $DB) 
     {
         $this->USER = $USER;
+        $this->EMAIL = $EMAIL;
         $this->PWD = $PWD;
         $this->DB = $DB;
     }
 
-    protected function CHECK_USER($USER)
+    protected function CHECK_USER() 
     {
-        $SQL = "SELECT * FROM users WHERE username = ?";
+        $SQL = "SELECT * FROM users WHERE (username = ? OR email = ?)";
         $CONNECT_READY = $this->DB->prepare($SQL);
-        $CONNECT_READY->execute([$USER]);
+        $CONNECT_READY->execute([$this->USER, $this->EMAIL]);
         $RESULT = $CONNECT_READY->fetch(PDO::FETCH_ASSOC);
 
         return $RESULT ? $RESULT : false;
@@ -44,16 +46,16 @@ class Login
             return "Invalid input";
         }
 
-        $user = $this->CHECK_USER($this->USER);
+        $IS_VALID_USER = $this->CHECK_USER();
 
-        if ($user && password_verify($this->PWD, $user['password'])) 
+        if ($IS_VALID_USER && password_verify($this->PWD, $IS_VALID_USER['password'])) 
         {
-            header("Location: welcome.php?username=" . $this->USER);
+            header("Location: welcome.php?username=" . urlencode($IS_VALID_USER['username']));
             exit();
         } 
         else 
         {
-            return "Invalid username or password";
+            return "No user with those credentials exist\n";
         }
     }
 }
@@ -63,13 +65,15 @@ if (isset($_POST['submitted']))
     require_once('database.php');
 
     $USERNAME = isset($_POST['username']) ? $_POST['username'] : false;
+    $EMAIL = isset($_POST['email']) ? $_POST['email'] : false;
     $PASSWORD = isset($_POST['password']) ? $_POST['password'] : false;
 
-    $LOG = new Login($USERNAME, $PASSWORD, $DB);
+    $LOG = new Login($USERNAME, $EMAIL, $PASSWORD, $DB);
     echo $LOG->LOGIN();
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -90,4 +94,3 @@ if (isset($_POST['submitted']))
     </form>
 </body>
 </html>
-
