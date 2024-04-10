@@ -291,7 +291,7 @@ input:checked + label .description
 
 .add-project-btn 
 {
-    left: calc(50% - 140px); 
+    left: calc(50% - 250px); 
     margin-right: 20px; 
 }
 
