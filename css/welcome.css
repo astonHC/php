@@ -155,6 +155,7 @@ button
     align-items: flex-end;
     transition: .6s cubic-bezier(.30, -0.03, 0, .99);
     box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, .5);
+    background-image: url('../img/card.jpg');
 }
 
 .CARD > .row
@@ -223,20 +224,28 @@ input:checked + label .description
 {
     margin-top: 0;
     opacity: 1 !important;
-    background-image: url('../img/c1.jpg');
 }
 
-.CARD[for="c1"]:hover,
-.CARD[for="c2"]:hover,
-.CARD[for="c3"]:hover
+.CARD:hover
 {
     opacity: .5 !important;
     transform: scale(1.025);
 }
 
-.CARD[for="c1"]:hover::after,
-.CARD[for="c2"]:hover::after,
-.CARD[for="c3"]:hover::after
+.CARD:hover::after
+{
+    content: "";
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 0, 255, 0.351);
+    transition: background-color 1s ease-in;
+    z-index: 1;
+}
+
+.CARD:hover::after
 {
     content: "";
     position: absolute; 
@@ -268,14 +277,11 @@ input:checked + label .description
     position: relative;
 }
 
-.add-project-btn 
+.add-project-btn, .sign-out-btn, .remove-project-btn
 {
     position: fixed; 
-    bottom: 20px;
-    left: 43%; 
-    transform: translateX(-50%); 
-    transform: translateY(-500%);
-    padding: 10px 20px; 
+    bottom: 500px;
+    padding: 20px; 
     background-color: #000000; 
     border: solid 1px #36363633; 
     border-radius: 5px;
@@ -283,7 +289,24 @@ input:checked + label .description
     transition: background-color 0.3s ease;
 }
 
-.add-project-btn:hover 
+.add-project-btn 
+{
+    left: calc(50% - 140px); 
+    margin-right: 20px; 
+}
+
+.sign-out-btn 
+{
+    left: calc(50% + 20px); 
+}
+
+.remove-project-btn 
+{
+    left: calc(50% + 155px); 
+
+}
+
+.add-project-btn:hover, .sign-out-btn:hover, .remove-project-btn:hover 
 {
     background-color: #3f9afc; 
 }
