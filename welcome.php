@@ -62,6 +62,5 @@
     <div class="project-container">
         <a href="project.php" class="add-project-btn">Add Project</a>
     </div>
-
 </body>
 </html>
