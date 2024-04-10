@@ -50,11 +50,12 @@ class Login
 
         if ($user && password_verify($this->PWD, $user['password'])) 
         {
-            header("Location: welcome.php?username=" . urlencode($user['username'])); // Pass the username here
+            header("Location: welcome.php?username=" . urlencode($user['username'])); 
             exit();
         } 
         else 
         {
+            echo "<script>document.querySelector('form').classList.add('wrong-credentials');</script>";
             return "No user with those credentials exist\n";
         }
     }
@@ -74,24 +75,24 @@ if (isset($_POST['submitted']))
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Login Page</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
     <h2>Login</h2>
-    <form action="login.php" method="post">
+    <form action="login.php" method="post" class="wrong-credentials">
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
+        <input type="text" id="username" name="username" placeholder="Username" required><br>
         <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="email" placeholder="Email" required><br>
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
+        <input type="password" id="password" name="password" placeholder="Password" required><br>
         <input type="hidden" name="submitted" value="1">
         <input type="submit" value="Login">
     </form>
 </body>
 </html>
+
