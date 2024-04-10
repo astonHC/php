@@ -29,6 +29,7 @@
             <option value="deployment">Deployment</option>
             <option value="complete">Complete</option>
         </select><br><br>
+        <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>"><br><br>
         
         <input type="submit" value="Add Project">
     </form>
