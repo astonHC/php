@@ -61,12 +61,27 @@ class ProjectController
 
         if($stmt->rowCount() > 0)
         {
+            echo '<script>
+                    setTimeout(function() 
+                    {
+                        window.location.href = "welcome.php?username=' . urlencode($this->GET_USERNAME()) . '";
+                    }, 2000);
+                </script>';
             return "Project added successfully";
         } 
         else 
         {
             return "Failed to add project: An error occurred while inserting data";
         }
+    }
+
+    private function GET_USERNAME() 
+    {
+        $SQL = "SELECT username FROM users WHERE uid = ?";
+        $stmt = $this->DB->prepare($SQL);
+        $stmt->execute([$this->UID]);
+        $RESULT = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $RESULT['username'] ?? '';
     }
 
     private function USER_EXISTS($UID)
@@ -95,6 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $PC = new ProjectController($TITLE, $DESC, $UID, $START, $END, $PROJECT_TYPE, $DB);
     echo $PC->ADD_PROJECT();
+    
 }
 
 ?>
