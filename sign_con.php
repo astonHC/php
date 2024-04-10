@@ -63,7 +63,8 @@ class SignUpController
         if ($this->CREATE_USER($this->USER, $this->EMAIL, $this->PWD)) 
         {
             return "User added to the database";
-        } 
+        }
+
         else 
         {
             return "An error occurred during registration";
