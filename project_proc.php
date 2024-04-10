@@ -52,6 +52,14 @@ class ProjectController
             return "User does not exist: Please provide a valid user ID";
         }
 
+        // CHECK IF THE USER HAS ALREADY CREATED 5 PROJECTS
+
+        if($this->COUNT_USER_PROJECTS($this->UID) >= 5)
+        {
+            $this->REDIRECT();
+            return "Project creation limit reached: A user can only create a maximum of 5 projects";
+        }
+
         // INJECT THE SQL QUERY FROM THE WEBSITE INTO THE DATABASE AND
         // EXECUTE THE QUERY TO ADD THE CORRESPONDENCE
 
@@ -61,14 +69,10 @@ class ProjectController
 
         if($stmt->rowCount() > 0)
         {
-            echo '<script>
-                    setTimeout(function() 
-                    {
-                        window.location.href = "welcome.php?username=' . urlencode($this->GET_USERNAME()) . '";
-                    }, 2000);
-                </script>';
+            $this->REDIRECT();
             return "Project added successfully";
         } 
+
         else 
         {
             return "Failed to add project: An error occurred while inserting data";
@@ -100,6 +104,28 @@ class ProjectController
         $stmt->execute([$UID]);
         $RESULT = $stmt->fetch(PDO::FETCH_ASSOC);
         return $RESULT ? true : false;
+    }
+
+    private function COUNT_USER_PROJECTS($UID)
+    {
+        $SQL = "SELECT COUNT(*) as count FROM projects WHERE uid = ?";
+        $stmt = $this->DB->prepare($SQL);
+        $stmt->execute([$UID]);
+        $RESULT = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $RESULT['count'] ?? 0;
+    }
+
+    // ENCAPSULATE THAT SCUFFED CHECKER INSIDE OF IT'S OWN FUNCTION FOR THE 
+    // SAKE OF BEING NEAT AND TIDY (MUCH TO THE CONTARY OF THIS FUNCTION)
+
+    public function REDIRECT()
+    {
+        echo '<script>
+            setTimeout(function() 
+            {
+                window.location.href = "welcome.php?username=' . urlencode($this->GET_USERNAME()) . '";
+            }, 2000);
+        </script>';
     }
 }
 
