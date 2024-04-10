@@ -61,9 +61,7 @@ class ProjectController
 
         if($stmt->rowCount() > 0)
         {
-            $username = isset($_POST['username']) ? urlencode($_POST['username']) : '';
-            header("Location: welcome.php?username=$username&project_added=true");
-            exit;
+            return "Project added successfully";
         } 
         else 
         {
@@ -99,5 +97,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     echo $PC->ADD_PROJECT();
 }
 
-?>
 ?>
