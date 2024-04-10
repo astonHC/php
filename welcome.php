@@ -6,22 +6,24 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     </style>
-
 </head>
 <body>
     <div class="WELCOME">
-
-    <?php
-    if (isset($_GET['username'])) 
-    {
-        echo "<h2>Welcome, " . htmlspecialchars($_GET['username']) . "!</h2>";
-    }
-    ?>
-    
+        <?php
+        if (isset($_GET['username'])) 
+        {
+            echo "<h2>Welcome, " . htmlspecialchars($_GET['username']) . "!</h2>";
+        }
+        ?>
     </div>
 
     <div class="CARD-WRAPPER">
         <div class="CARD-CONTAINER">
+
+            <!--THIS PHP IS REALLY FRAGILE-->
+            <!--I TRIED TO ADHERE TO THE CONSISTENCY OF MAKING THIS PROJECT OOP-->
+            <!--YET IT BREAKS WHENEVER I MAKE IT SUCH-->
+
             <?php
             require_once('database.php');
             
@@ -61,6 +63,8 @@
 
     <div class="project-container">
         <a href="project.php" class="add-project-btn">Add Project</a>
+        <a href="logout.php" class="sign-out-btn">Sign Out</a>
+        <a href="remove.php" class="remove-project-btn">Remove Project</a>
     </div>
 </body>
 </html>
