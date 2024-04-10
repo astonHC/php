@@ -49,48 +49,53 @@ class ProjectController
         // UNDER DIFFERENT UID'S
 
         $LOGGED_IN_UID = $_SESSION['uid'];
+        $LOGGED_IN_USERNAME = $this->GET_USERNAME();
 
         if ($this->UID != $LOGGED_IN_UID) 
         {
-            $this->REDIRECT();
-            return "Unauthorized: You can only create projects under your own user ID";
+            $this->REDIRECT_PROJECT();
+            return "Unauthorized: You are currently logged in as user '{$LOGGED_IN_USERNAME}' with user ID '{$LOGGED_IN_UID}'. You can only create projects under your own user ID.";
         }
-
-        // CHECK IF THE CORRESPONDING USER ID EXISTS IN RELATION TO WHO
-        // IS CREATING THE PROJECT
-
-        if(!$this->USER_EXISTS($this->UID))
+        
+        else
         {
-            $this->REDIRECT();
-            return "User does not exist: Please provide a valid user ID";
-        }
+            // CHECK IF THE CORRESPONDING USER ID EXISTS IN RELATION TO WHO
+            // IS CREATING THE PROJECT
 
-        // CHECK IF THE USER HAS ALREADY CREATED 5 PROJECTS
+            if(!$this->USER_EXISTS($this->UID))
+            {
+                $this->REDIRECT_PROJECT();
+                return "User does not exist: Please provide a valid user ID";
+            }
 
-        if($this->COUNT_USER_PROJECTS($this->UID) >= 5)
-        {
-            $this->REDIRECT();
-            return "Project creation limit reached: A user can only create a maximum of 5 projects";
-        }
+            // CHECK IF THE USER HAS ALREADY CREATED 5 PROJECTS
 
-        // INJECT THE SQL QUERY FROM THE WEBSITE INTO THE DATABASE AND
-        // EXECUTE THE QUERY TO ADD THE CORRESPONDENCE
+            if($this->COUNT_USER_PROJECTS($this->UID) >= 5)
+            {
+                $this->REDIRECT_HOME();
+                return "Project creation limit reached: A user can only create a maximum of 5 projects";
+            }
 
-        $SQL = "INSERT INTO projects (title, description, uid, start_date, end_date, phase) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $this->DB->prepare($SQL);
-        $stmt->execute([$this->TITLE, $this->DESC, $this->UID, $this->START, $this->END, $this->PROJECT_TYPE]);
+            // INJECT THE SQL QUERY FROM THE WEBSITE INTO THE DATABASE AND
+            // EXECUTE THE QUERY TO ADD THE CORRESPONDENCE
 
-        if($stmt->rowCount() > 0)
-        {
-            $this->REDIRECT();
-            return "Project added successfully";
-        } 
+            $SQL = "INSERT INTO projects (title, description, uid, start_date, end_date, phase) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->DB->prepare($SQL);
+            $stmt->execute([$this->TITLE, $this->DESC, $this->UID, $this->START, $this->END, $this->PROJECT_TYPE]);
 
-        else 
-        {
-            return "Failed to add project: An error occurred while inserting data";
+            if($stmt->rowCount() > 0)
+            {
+                $this->REDIRECT_HOME();
+                return "Project added successfully";
+            } 
+
+            else 
+            {
+                return "Failed to add project: An error occurred while inserting data";
+            }
         }
     }
+
 
     // THESE FOLLOWING FUNCTIONS, WHILE LOOKING SIMILAR FROM THE OFFSET
     // HOUSEE VERY DIFFERENT FUNCTIONALITY
@@ -131,12 +136,22 @@ class ProjectController
     // ENCAPSULATE THAT SCUFFED CHECKER INSIDE OF IT'S OWN FUNCTION FOR THE 
     // SAKE OF BEING NEAT AND TIDY (MUCH TO THE CONTARY OF THIS FUNCTION)
 
-    public function REDIRECT()
+    public function REDIRECT_HOME()
     {
         echo '<script>
             setTimeout(function() 
             {
                 window.location.href = "welcome.php?username=' . urlencode($this->GET_USERNAME()) . '";
+            }, 2000);
+        </script>';
+    }
+
+    public function REDIRECT_PROJECT()
+    {
+        echo '<script>
+            setTimeout(function() 
+            {
+                window.location.href = "project.php?";
             }, 2000);
         </script>';
     }
