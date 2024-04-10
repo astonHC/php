@@ -44,11 +44,24 @@ class ProjectController
             return "Invalid input: Please provide all required fields";
         }
 
+        // CHECK TO DETERMINE THE CURRENT LOGGED IN UID
+        // THIS IS A CHECK TO NOT ALLOW USERS TO CREATE PROJECTS
+        // UNDER DIFFERENT UID'S
+
+        $LOGGED_IN_UID = $_SESSION['uid'];
+
+        if ($this->UID != $LOGGED_IN_UID) 
+        {
+            $this->REDIRECT();
+            return "Unauthorized: You can only create projects under your own user ID";
+        }
+
         // CHECK IF THE CORRESPONDING USER ID EXISTS IN RELATION TO WHO
         // IS CREATING THE PROJECT
 
         if(!$this->USER_EXISTS($this->UID))
         {
+            $this->REDIRECT();
             return "User does not exist: Please provide a valid user ID";
         }
 
