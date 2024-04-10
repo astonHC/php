@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --main-color: #1d3b6b;
+    --bg-color: #161616;
+    --text-color: #ffffff;
+    --span-color: #1ee9ff;
+    --card-color: #4540dd7c;
+    --button-color: #00011c;
+    --second-color: #f3f8ff;
+    --h2-font: 3rem;
+}
+
+body 
+{
+    background: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    width: 100%; 
+}
