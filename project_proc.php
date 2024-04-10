@@ -43,22 +43,10 @@ class ProjectController
         {
             return "Invalid input: Please provide all required fields";
         }
-
-        // CHECK TO DETERMINE THE CURRENT LOGGED IN UID
-        // THIS IS A CHECK TO NOT ALLOW USERS TO CREATE PROJECTS
-        // UNDER DIFFERENT UID'S
-
-        $LOGGED_IN_UID = $_SESSION['uid'];
-        $LOGGED_IN_USERNAME = $this->GET_USERNAME();
-
-        if ($this->UID != $LOGGED_IN_UID) 
-        {
-            $this->REDIRECT_PROJECT();
-            return "Unauthorized: You are currently logged in as user '{$LOGGED_IN_USERNAME}' with user ID '{$LOGGED_IN_UID}'. You can only create projects under your own user ID.";
-        }
         
         else
         {
+            
             // CHECK IF THE CORRESPONDING USER ID EXISTS IN RELATION TO WHO
             // IS CREATING THE PROJECT
 
