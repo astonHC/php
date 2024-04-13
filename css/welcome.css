@@ -155,7 +155,7 @@ button
     align-items: flex-end;
     transition: .6s cubic-bezier(.30, -0.03, 0, .99);
     box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, .5);
-    background-image: url('../img/card.jpg');
+    background-image: url('../img/card.png');
 }
 
 .CARD > .row
@@ -280,7 +280,7 @@ input:checked + label .description
 .add-project-btn, .sign-out-btn, .remove-project-btn
 {
     position: fixed; 
-    bottom: 500px;
+    bottom: 10vh;
     padding: 20px; 
     background-color: #000000; 
     border: solid 1px #36363633; 
@@ -291,20 +291,15 @@ input:checked + label .description
 
 .add-project-btn 
 {
-    left: calc(50% - 250px); 
+    left: calc(50vw - 15vw); 
     margin-right: 20px; 
 }
 
 .sign-out-btn 
 {
-    left: calc(50% + 20px); 
+    left: calc(50vw + 2vw); 
 }
 
-.remove-project-btn 
-{
-    left: calc(50% + 155px); 
-
-}
 
 .add-project-btn:hover, .sign-out-btn:hover, .remove-project-btn:hover 
 {
