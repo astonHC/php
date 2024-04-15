@@ -277,7 +277,7 @@ input:checked + label .description
     position: relative;
 }
 
-.add-project-btn, .sign-out-btn, .remove-project-btn
+.add-project-btn, .sign-out-btn, .edit-project-btn
 {
     position: fixed; 
     bottom: 10vh;
@@ -297,11 +297,16 @@ input:checked + label .description
 
 .sign-out-btn 
 {
-    left: calc(50vw + 2vw); 
+    left: calc(50vw + -2vw); 
+}
+
+.edit-project-btn 
+{
+    left: calc(50vw + 10vw); 
 }
 
 
-.add-project-btn:hover, .sign-out-btn:hover, .remove-project-btn:hover 
+.add-project-btn:hover, .sign-out-btn:hover, .edit-project-btn:hover 
 {
     background-color: #3f9afc; 
 }
