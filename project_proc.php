@@ -46,7 +46,6 @@ class ProjectController
         
         else
         {
-            
             // CHECK IF THE CORRESPONDING USER ID EXISTS IN RELATION TO WHO
             // IS CREATING THE PROJECT
 
@@ -84,6 +83,14 @@ class ProjectController
         }
     }
 
+    private function USER_OWNS_PROJECT($UID, $PID)
+    {
+        $SQL = "SELECT * FROM projects WHERE uid = ? AND pid = ?";
+        $stmt = $this->DB->prepare($SQL);
+        $stmt->execute([$UID, $PID]);
+        $RESULT = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $RESULT ? true : false;
+    }
 
     // THESE FOLLOWING FUNCTIONS, WHILE LOOKING SIMILAR FROM THE OFFSET
     // HOUSEE VERY DIFFERENT FUNCTIONALITY
