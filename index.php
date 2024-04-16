@@ -23,7 +23,7 @@
     <!----BASE FUNCTIONALITY FOR THE NAVBAR----->
 
 	<main-header>
-        <h1>Harry Clark - IAD Port 3</h1>
+        <h1>AProject</h1>
         <nav>
             <ul class="NAVBAR">
                 <li><a href="index.php">HOME</a></li>
