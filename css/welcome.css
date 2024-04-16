@@ -272,41 +272,35 @@ input:checked + label .description
     transform: translate(-50%, -50%);
 }
 
-.project-container 
-{
+.project-container {
     position: relative;
 }
 
-.add-project-btn, .sign-out-btn, .edit-project-btn
-{
-    position: fixed; 
+.add-project-btn, .sign-out-btn, .edit-btn {
+    position: fixed;
     bottom: 10vh;
-    padding: 20px; 
-    background-color: #000000; 
-    border: solid 1px #36363633; 
+    padding: 20px;
+    background-color: #000000;
+    border: solid 1px #36363633;
     border-radius: 5px;
-    text-align: center; 
+    text-align: center;
     transition: background-color 0.3s ease;
 }
 
-.add-project-btn 
-{
-    left: calc(50vw - 15vw); 
-    margin-right: 20px; 
+.add-project-btn {
+    left: calc(50vw - 15vw);
+    margin-right: 20px;
 }
 
-.sign-out-btn 
-{
-    left: calc(50vw + -2vw); 
+.sign-out-btn {
+    left: calc(50vw + -2vw);
 }
 
-.edit-project-btn 
-{
-    left: calc(50vw + 10vw); 
+.edit-btn {
+    left: calc(50vw + 10vw);
 }
 
-
-.add-project-btn:hover, .sign-out-btn:hover, .edit-project-btn:hover 
-{
-    background-color: #3f9afc; 
+.add-project-btn:hover, .sign-out-btn:hover, .edit-btn:hover {
+    background-color: #1e1e1e;
 }
+
