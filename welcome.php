@@ -53,6 +53,7 @@
                 echo '<div class="description">';
                 echo '<h4>'.$project['title'].'</h4>';
                 echo '<p>'.$project['description'].'</p>';
+                echo '<p>'.$project['phase'].'</p>';
                 echo '</div>';
                 echo '</div>';
                 echo '</label>';
@@ -60,11 +61,9 @@
             ?>
         </div>
     </div>
-
     <div class="project-container">
         <a href="project.php" class="add-project-btn">Add Project</a>
         <a href="logout.php" class="sign-out-btn">Sign Out</a>
-        <a href="remove.php" class="remove-project-btn">Remove Project</a>
     </div>
 </body>
 </html>
